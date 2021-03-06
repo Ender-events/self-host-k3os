@@ -1,0 +1,10 @@
+---
+secretGenerator:
+  - name: postgres-secret
+    files:
+      - username=.secrets/postgres-secret/username
+      - password=.secrets/postgres-secret/password
+resources:
+  - resources/postgres.yaml
+  - resources/nextcloud.yaml
+  - resources/ingress.yaml
