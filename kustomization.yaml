@@ -4,7 +4,27 @@ secretGenerator:
     files:
       - username=.secrets/postgres-secret/username
       - password=.secrets/postgres-secret/password
+  - name: restic-secret
+    files:
+      - access_key_id=.secrets/restic-secret/access_key_id
+      - secret_access_key=.secrets/restic-secret/secret_access_key
+      - password=.secrets/restic-secret/password
+  - name: restic-staging-secret
+    files:
+      - access_key_id=.secrets/restic-staging-secret/access_key_id
+      - secret_access_key=.secrets/restic-staging-secret/secret_access_key
+      - password=.secrets/restic-staging-secret/password
+configMapGenerator:
+  - name: restic-config
+    files:
+      - repository=.secrets/restic-config/repository
+  - name: restic-staging-config
+    files:
+      - repository=.secrets/restic-staging-config/repository
 resources:
   - resources/postgres.yaml
+  - resources/persistent-volume.yaml
+  - resources/config.yaml
   - resources/nextcloud.yaml
   - resources/ingress.yaml
+  - resources/backup.yaml

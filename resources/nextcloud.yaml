@@ -12,19 +12,6 @@ spec:
     app: nextcloud
   clusterIP: None
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nextcloud-pv-claim
-  labels:
-    app: nextcloud
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 16Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,9 +34,15 @@ spec:
           name: nextcloud
           env:
             - name: POSTGRES_HOST
-              value: postgres:5432
+              valueFrom:
+                configMapKeyRef:
+                  name: nextcloud-config
+                  key: db_authority
             - name: POSTGRES_DB
-              value: nextcloud
+              valueFrom:
+                configMapKeyRef:
+                  name: nextcloud-config
+                  key: db_name
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
