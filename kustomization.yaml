@@ -26,11 +26,11 @@ configMapGenerator:
     files:
       - repository=.secrets/restic-staging-config/repository
 resources:
-  - resources/postgres.yaml
-  - resources/persistent-volume.yaml
-  - resources/config.yaml
-  - resources/restore.yaml
-  - resources/nextcloud.yaml
-  - resources/ingress.yaml
-  - resources/backup.yaml
+  - ingress.yaml
+  - common/postgres.yaml
+  - nextcloud/persistent-volume.yaml
+  - nextcloud/config.yaml
+  - nextcloud/restore.yaml
+  - nextcloud/nextcloud.yaml
+  - nextcloud/backup.yaml
   - minio/minio.yaml
