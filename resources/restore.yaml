@@ -1,0 +1,65 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nextcloud-restore
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: restore
+          image: enderevents/self-host-restore:latest
+          env:
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: nextcloud-config
+                  key: db_host
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: nextcloud-config
+                  key: db_port
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: nextcloud-config
+                  key: db_name
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: username
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: RESTIC_REPOSITORY
+              valueFrom:
+                configMapKeyRef:
+                  name: restic-staging-config
+                  key: repository
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: restic-staging-secret
+                  key: access_key_id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: restic-staging-secret
+                  key: secret_access_key
+            - name: RESTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: restic-staging-secret
+                  key: password
+          volumeMounts:
+            - name: nextcloud-persistent-storage
+              mountPath: /mnt/nextcloud
+      volumes:
+        - name: nextcloud-persistent-storage
+          persistentVolumeClaim:
+            claimName: nextcloud-pv-claim
+  backoffLimit: 3
