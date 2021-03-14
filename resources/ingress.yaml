@@ -12,6 +12,9 @@ spec:
     - hosts:
         - nextcloud.localhost
       secretName: certificate-tls
+    - hosts:
+        - minio.localhost
+      secretName: minio-tls-certificate
   rules:
     - host: nextcloud.localhost
       http:
@@ -19,3 +22,9 @@ spec:
           - backend:
               serviceName: nextcloud
               servicePort: 80
+    - host: minio.localhost
+      http:
+        paths:
+          - backend:
+              serviceName: minio
+              servicePort: 9000
