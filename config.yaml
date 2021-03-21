@@ -1,0 +1,20 @@
+k3os:
+  mode: install
+  install:
+    silent: true
+  data_sources:
+    - cdrom
+  dns_nameservers:
+    - 9.9.9.9
+    - 149.112.112.112
+    - 2620:fe::fe
+    - 2620::fe::9
+    - 1.1.1.1
+    - 2606:4700:4700:1111
+  ntp_servers:
+    - 0.fr.pool.ntp.org
+    - 1.fr.pool.ntp.org
+    - 2.fr.pool.ntp.org
+    - 3.fr.pool.ntp.org
+ssh_authorized_keys:
+  - github:Ender-events
