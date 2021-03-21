@@ -25,6 +25,10 @@ configMapGenerator:
   - name: restic-staging-config
     files:
       - repository=.secrets/restic-staging-config/repository
+  - name: nextcloud-config
+    behavior: merge  # nextcloud/config.yaml
+    files:
+      - nginx_conf=nextcloud/nginx.conf
 resources:
   - ingress.yaml
   - common/postgres.yaml

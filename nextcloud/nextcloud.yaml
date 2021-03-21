@@ -30,7 +30,7 @@ spec:
         app: nextcloud
     spec:
       containers:
-        - image: nextcloud:19.0.8-apache
+        - image: nextcloud:19.0.8-fpm
           name: nextcloud
           env:
             - name: POSTGRES_HOST
@@ -54,12 +54,31 @@ spec:
                   name: postgres-secret
                   key: password
           ports:
-            - containerPort: 80
-              name: nextcloud
+            - containerPort: 9000
+              name: fpm
           volumeMounts:
             - name: nextcloud-persistent-storage
               mountPath: /var/www/html
+        - image: nginx:1.19.8-alpine
+          name: nginx
+          ports:
+            - containerPort: 80
+              name: nginx
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
+            - name: nextcloud-persistent-storage
+              mountPath: /var/www/html
+              readOnly: true
       volumes:
         - name: nextcloud-persistent-storage
           persistentVolumeClaim:
             claimName: nextcloud-pv-claim
+        - name: nginx-conf
+          configMap:
+            name: nextcloud-config
+            items:
+              - key: nginx_conf
+                path: nginx.conf
