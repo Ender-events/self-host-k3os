@@ -1,7 +1,4 @@
 k3os:
-  mode: install
-  install:
-    silent: true
   data_sources:
     - cdrom
   dns_nameservers:
