@@ -6,12 +6,13 @@ metadata:
   namespace: default
   annotations:
     cert-manager.io/issuer: selfsigned-issuer
-
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
 spec:
   tls:
     - hosts:
         - nextcloud.localhost
-      secretName: certificate-tls
+      secretName: nextcloud-tls-certificate
     - hosts:
         - minio.localhost
       secretName: minio-tls-certificate

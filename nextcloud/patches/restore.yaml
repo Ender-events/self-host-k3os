@@ -1,0 +1,28 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nextcloud-restore
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: restore
+          env:
+            - name: RESTIC_REPOSITORY
+              valueFrom:
+                configMapKeyRef:
+                  name: restic-config
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: restic-secret
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: restic-secret
+            - name: RESTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: restic-secret

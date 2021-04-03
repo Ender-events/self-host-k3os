@@ -38,3 +38,9 @@ resources:
   - nextcloud/nextcloud.yaml
   - nextcloud/backup.yaml
   - minio/minio.yaml
+patches:
+  - .secrets/patches/ingress.yaml
+  - nextcloud/patches/persistent-volume.yaml
+  - nextcloud/patches/restore.yaml
+  - nextcloud/patches/backup.yaml
+  - minio/patches/persistent-volume.yaml

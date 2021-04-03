@@ -62,7 +62,7 @@ spec:
               name: minio
           volumeMounts:
             - name: minio-persistent-storage
-              mountPath: /var/www/html
+              mountPath: /data
       volumes:
         - name: minio-persistent-storage
           persistentVolumeClaim:
