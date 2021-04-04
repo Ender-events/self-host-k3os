@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gotify-pv-claim
+  labels:
+    app: gotify
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gotify
+  labels:
+    app: gotify
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: gotify
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gotify
+  labels:
+    app: gotify
+spec:
+  selector:
+    matchLabels:
+      app: gotify
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: gotify
+    spec:
+      containers:
+        - image: gotify/server:2.0.21
+          name: gotify
+          env:
+            - name: GOTIFY_DEFAULTUSER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: gotify-secret
+                  key: user
+            - name: GOTIFY_DEFAULTUSER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: gotify-secret
+                  key: password
+          ports:
+            - containerPort: 80
+              name: gotify
+          volumeMounts:
+            - name: gotify-persistent-storage
+              mountPath: /data
+      volumes:
+        - name: gotify-persistent-storage
+          persistentVolumeClaim:
+            claimName: gotify-pv-claim

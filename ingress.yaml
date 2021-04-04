@@ -16,6 +16,12 @@ spec:
     - hosts:
         - minio.localhost
       secretName: minio-tls-certificate
+    - hosts:
+        - n8n.localhost
+      secretName: n8n-tls-certificate
+    - hosts:
+        - gotify.localhost
+      secretName: gotify-tls-certificate
   rules:
     - host: nextcloud.localhost
       http:
@@ -29,3 +35,15 @@ spec:
           - backend:
               serviceName: minio
               servicePort: 9000
+    - host: n8n.localhost
+      http:
+        paths:
+          - backend:
+              serviceName: n8n
+              servicePort: 5678
+    - host: gotify.localhost
+      http:
+        paths:
+          - backend:
+              serviceName: gotify
+              servicePort: 80

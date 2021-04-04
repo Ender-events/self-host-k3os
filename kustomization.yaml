@@ -18,6 +18,15 @@ secretGenerator:
     files:
       - access_key_id=.secrets/minio-secret/access_key_id
       - secret_access_key=.secrets/minio-secret/secret_access_key
+  - name: n8n-secret
+    files:
+      - encryption=.secrets/n8n-secret/encryption
+      - user=.secrets/n8n-secret/user
+      - password=.secrets/n8n-secret/password
+  - name: gotify-secret
+    files:
+      - user=.secrets/gotify-secret/user
+      - password=.secrets/gotify-secret/password
 configMapGenerator:
   - name: restic-config
     files:
@@ -38,6 +47,8 @@ resources:
   - nextcloud/nextcloud.yaml
   - nextcloud/backup.yaml
   - minio/minio.yaml
+  - n8n/n8n.yaml
+  - gotify/gotify.yaml
 patches:
   - .secrets/patches/ingress.yaml
   - nextcloud/patches/persistent-volume.yaml
