@@ -49,6 +49,7 @@ resources:
   - minio/minio.yaml
   - n8n/n8n.yaml
   - gotify/gotify.yaml
+  - whoami/whoami.yaml
 patches:
   - .secrets/patches/ingress.yaml
   - nextcloud/patches/persistent-volume.yaml

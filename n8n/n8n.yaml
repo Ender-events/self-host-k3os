@@ -43,11 +43,13 @@ spec:
         app: n8n
     spec:
       containers:
-        - image: n8nio/n8n:0.114.0
+        - image: n8nio/n8n:0.117.0
           name: n8n
           env:
             - name: N8N_PROTOCOL
               value: https
+            - name: N8N_PORT
+              value: "5678"
             - name: NODE_ENV
               value: production
             - name: GENERIC_TIMEZONE

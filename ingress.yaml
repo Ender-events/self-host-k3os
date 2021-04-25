@@ -47,3 +47,9 @@ spec:
           - backend:
               serviceName: gotify
               servicePort: 80
+    - host: whoami.localhost
+      http:
+        paths:
+          - backend:
+              serviceName: whoami
+              servicePort: 80
