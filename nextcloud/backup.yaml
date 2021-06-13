@@ -66,3 +66,4 @@ spec:
             - name: nextcloud-persistent-storage
               persistentVolumeClaim:
                 claimName: nextcloud-pv-claim
+          hostname: k3os-3871
