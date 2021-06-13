@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
@@ -27,29 +27,49 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: nextcloud
-              servicePort: 80
+              service:
+                name: nextcloud
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
     - host: minio.localhost
       http:
         paths:
           - backend:
-              serviceName: minio
-              servicePort: 9000
+              service:
+                name: minio
+                port:
+                  number: 9000
+            path: /
+            pathType: Prefix
     - host: n8n.localhost
       http:
         paths:
           - backend:
-              serviceName: n8n
-              servicePort: 5678
+              service:
+                name: n8n
+                port:
+                  number: 5678
+            path: /
+            pathType: Prefix
     - host: gotify.localhost
       http:
         paths:
           - backend:
-              serviceName: gotify
-              servicePort: 80
+              service:
+                name: gotify
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
     - host: whoami.localhost
       http:
         paths:
           - backend:
-              serviceName: whoami
-              servicePort: 80
+              service:
+                name: whoami
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
