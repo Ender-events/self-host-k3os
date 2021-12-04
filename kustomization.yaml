@@ -46,7 +46,7 @@ resources:
   - common/postgres.yaml
   - nextcloud/persistent-volume.yaml
   - nextcloud/config.yaml
-  - nextcloud/restore.yaml
+  # - nextcloud/restore.yaml # don't need to restore now
   - nextcloud/nextcloud.yaml
   - nextcloud/backup.yaml
   - minio/minio.yaml
@@ -57,6 +57,6 @@ resources:
 patches:
   - .secrets/patches/ingress.yaml
   - nextcloud/patches/persistent-volume.yaml
-  - nextcloud/patches/restore.yaml
+  # - nextcloud/patches/restore.yaml
   - nextcloud/patches/backup.yaml
   - minio/patches/persistent-volume.yaml

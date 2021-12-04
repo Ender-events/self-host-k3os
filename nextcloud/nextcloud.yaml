@@ -30,7 +30,7 @@ spec:
         app: nextcloud
     spec:
       containers:
-        - image: nextcloud:21.0.3-fpm
+        - image: nextcloud:22.2.3-fpm
           name: nextcloud
           env:
             - name: POSTGRES_HOST
@@ -59,7 +59,7 @@ spec:
           volumeMounts:
             - name: nextcloud-persistent-storage
               mountPath: /var/www/html
-        - image: nginx:1.20.1-alpine
+        - image: nginx:1.20.2-alpine
           name: nginx
           ports:
             - containerPort: 80
