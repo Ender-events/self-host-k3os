@@ -38,6 +38,9 @@ configMapGenerator:
     behavior: merge  # nextcloud/config.yaml
     files:
       - nginx_conf=nextcloud/nginx.conf
+  - name: wireguard-config
+    files:
+      - host=.secrets/wireguard-config/host
 resources:
   - ingress.yaml
   - common/postgres.yaml
@@ -50,6 +53,7 @@ resources:
   - n8n/n8n.yaml
   - gotify/gotify.yaml
   - whoami/whoami.yaml
+  - wireguard/wireguard.yaml
 patches:
   - .secrets/patches/ingress.yaml
   - nextcloud/patches/persistent-volume.yaml
