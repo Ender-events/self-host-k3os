@@ -25,6 +25,19 @@ spec:
     app: minio
   clusterIP: None
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-minio
+  labels:
+    app: minio
+spec:
+  ports:
+    - port: 9001
+  selector:
+    app: minio
+  clusterIP: None
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -45,21 +58,28 @@ spec:
       containers:
         - image: minio/minio
           name: minio
-          args: ["server", "/data"]
+          args: ["server", "/data", "--console-address", ":9001"]
           env:
-            - name: MINIO_ACCESS_KEY
+            - name: MINIO_ROOT_USER
               valueFrom:
                 secretKeyRef:
                   name: minio-secret
                   key: access_key_id
-            - name: MINIO_SECRET_KEY
+            - name: MINIO_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: minio-secret
                   key: secret_access_key
+            - name: MINIO_BROWSER_REDIRECT_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: minio-config-minio-browser-redirect-url
+                  key: minio_browser_redirect_url
           ports:
             - containerPort: 9000
               name: minio
+            - containerPort: 9001
+              name: dashboard-minio
           volumeMounts:
             - name: minio-persistent-storage
               mountPath: /data

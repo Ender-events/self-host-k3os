@@ -41,6 +41,9 @@ configMapGenerator:
   - name: wireguard-config
     files:
       - host=.secrets/wireguard-config/host
+  - name: minio-config-minio-browser-redirect-url
+    files:
+      - minio_browser_redirect_url=.secrets/minio-config/minio_browser_redirect_url
 resources:
   - ingress.yaml
   - common/postgres.yaml

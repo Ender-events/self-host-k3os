@@ -17,6 +17,9 @@ spec:
         - minio.localhost
       secretName: minio-tls-certificate
     - hosts:
+        - dashboard.minio.localhost
+      secretName: dashboard-minio-tls-certificate
+    - hosts:
         - n8n.localhost
       secretName: n8n-tls-certificate
     - hosts:
@@ -41,6 +44,16 @@ spec:
                 name: minio
                 port:
                   number: 9000
+            path: /
+            pathType: Prefix
+    - host: dashboard.minio.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: dashboard-minio
+                port:
+                  number: 9001
             path: /
             pathType: Prefix
     - host: n8n.localhost
