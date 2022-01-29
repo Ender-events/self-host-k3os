@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parrot-discord
+  labels:
+    app: parrot-discord
+spec:
+  selector:
+    matchLabels:
+      app: parrot-discord
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: parrot-discord
+    spec:
+      containers:
+        - image: ghcr.io/aquelemiguel/parrot:v1.1.0
+          name: parrot-discord
+          env:
+            - name: DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: parrot-discord-secret
+                  key: discord-token
+            - name: DISCORD_APPID
+              valueFrom:
+                secretKeyRef:
+                  name: parrot-discord-secret
+                  key: discord-appid

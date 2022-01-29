@@ -27,6 +27,10 @@ secretGenerator:
     files:
       - user=.secrets/gotify-secret/user
       - password=.secrets/gotify-secret/password
+  - name: parrot-discord-secret
+    files:
+      - discord-token=.secrets/parrot-discord-secret/discord-token
+      - discord-appid=.secrets/parrot-discord-secret/discord-appid
 configMapGenerator:
   - name: restic-config
     files:
@@ -55,6 +59,7 @@ resources:
   - minio/minio.yaml
   - n8n/n8n.yaml
   - gotify/gotify.yaml
+  - parrot-discord/parrot.yaml
   - whoami/whoami.yaml
   - wireguard/wireguard.yaml
 patches:
