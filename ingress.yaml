@@ -25,6 +25,9 @@ spec:
     - hosts:
         - gotify.localhost
       secretName: gotify-tls-certificate
+    - hosts:
+        - kuma.localhost
+      secretName: kuma-tls-certificate
   rules:
     - host: nextcloud.localhost
       http:
@@ -84,5 +87,15 @@ spec:
                 name: whoami
                 port:
                   number: 80
+            path: /
+            pathType: Prefix
+    - host: kuma.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: uptime-kuma
+                port:
+                  number: 3001
             path: /
             pathType: Prefix

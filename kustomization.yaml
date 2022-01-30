@@ -60,6 +60,7 @@ resources:
   - n8n/n8n.yaml
   - gotify/gotify.yaml
   - parrot-discord/parrot.yaml
+  - uptime-kuma/kuma.yaml
   - whoami/whoami.yaml
   - wireguard/wireguard.yaml
 patches:
