@@ -35,6 +35,7 @@ configMapGenerator:
   - name: restic-config
     files:
       - repository=.secrets/restic-config/repository
+      - post_hook_url=.secrets/restic-config/post_hook_url
   - name: restic-staging-config
     files:
       - repository=.secrets/restic-staging-config/repository

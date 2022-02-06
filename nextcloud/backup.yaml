@@ -1,5 +1,5 @@
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: nextcloud-backup
@@ -7,12 +7,13 @@ spec:
   schedule: "15 2 * * *"
   jobTemplate:
     spec:
+      backoffLimit: 3
       template:
         spec:
           restartPolicy: OnFailure
           containers:
             - name: backup
-              image: enderevents/self-host-backup:latest
+              image: ghcr.io/ender-events/self-host-backup:v1.1.0
               env:
                 - name: PGHOST
                   valueFrom:

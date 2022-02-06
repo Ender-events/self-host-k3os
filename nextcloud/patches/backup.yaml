@@ -1,5 +1,5 @@
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: nextcloud-backup
@@ -15,6 +15,7 @@ spec:
                   valueFrom:
                     configMapKeyRef:
                       name: restic-config
+                      key: repository
                 - name: AWS_ACCESS_KEY_ID
                   valueFrom:
                     secretKeyRef:
@@ -27,3 +28,8 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: restic-secret
+                - name: POST_HOOK_URL
+                  valueFrom:
+                    configMapKeyRef:
+                      name: restic-config
+                      key: post_hook_url
