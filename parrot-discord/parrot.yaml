@@ -17,7 +17,7 @@ spec:
         app: parrot-discord
     spec:
       containers:
-        - image: ghcr.io/aquelemiguel/parrot:v1.2.0
+        - image: ghcr.io/aquelemiguel/parrot:v1.4.0
           name: parrot-discord
           env:
             - name: DISCORD_TOKEN
@@ -25,7 +25,7 @@ spec:
                 secretKeyRef:
                   name: parrot-discord-secret
                   key: discord-token
-            - name: DISCORD_APPID
+            - name: DISCORD_APP_ID
               valueFrom:
                 secretKeyRef:
                   name: parrot-discord-secret
