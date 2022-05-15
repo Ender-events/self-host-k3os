@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fah-pv-claim
+  labels:
+    app: fah
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1024Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fah
+  labels:
+    app: fah
+spec:
+  ports:
+    - port: 7396
+  selector:
+    app: fah
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fah
+  labels:
+    app: fah
+spec:
+  selector:
+    matchLabels:
+      app: fah
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: fah
+    spec:
+      containers:
+        - image: yurinnick/folding-at-home:7.6-cpu
+          name: fah
+          env:
+            - name: USER
+              value: Ender-events
+            - name: POWER
+              value: light
+            - name: ALLOWED_HOSTS
+              value: 0/0
+            - name: PASSKEY
+              valueFrom:
+                secretKeyRef:
+                  name: fah-secret
+                  key: passkey
+          ports:
+            - containerPort: 7396
+          volumeMounts:
+            - name: fah-persistent-storage
+              mountPath: /app/data
+      volumes:
+        - name: fah-persistent-storage
+          persistentVolumeClaim:
+            claimName: fah-pv-claim

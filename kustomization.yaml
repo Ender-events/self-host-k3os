@@ -31,6 +31,9 @@ secretGenerator:
     files:
       - discord-token=.secrets/parrot-discord-secret/discord-token
       - discord-appid=.secrets/parrot-discord-secret/discord-appid
+  - name: fah-secret
+    files:
+      - passkey=.secrets/fah-secret/passkey
 configMapGenerator:
   - name: restic-config
     files:
@@ -52,6 +55,7 @@ configMapGenerator:
 resources:
   - ingress.yaml
   - common/postgres.yaml
+  - fah/fah.yaml
   - nextcloud/persistent-volume.yaml
   - nextcloud/config.yaml
   # - nextcloud/restore.yaml # don't need to restore now
