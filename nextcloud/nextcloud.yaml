@@ -30,7 +30,7 @@ spec:
         app: nextcloud
     spec:
       containers:
-        - image: nextcloud:23.0.6-fpm
+        - image: nextcloud:23.0.7-fpm
           name: nextcloud
           env:
             - name: POSTGRES_HOST
@@ -61,7 +61,7 @@ spec:
               mountPath: /var/www/html
           command: ["/entrypoint.sh"]
           args: ["bash", "-c", "/cron.sh & php-fpm"]
-        - image: nginx:1.21.6-alpine
+        - image: nginx:1.22.0-alpine
           name: nginx
           ports:
             - containerPort: 80
