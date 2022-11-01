@@ -6,8 +6,7 @@ metadata:
   namespace: default
   annotations:
     cert-manager.io/issuer: selfsigned-issuer
-    traefik.ingress.kubernetes.io/redirect-entry-point: https
-    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   tls:
     - hosts:

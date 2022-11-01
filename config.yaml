@@ -8,6 +8,9 @@ k3os:
     - 2620::fe::9
     - 1.1.1.1
     - 2606:4700:4700:1111
+  k3s_args:
+    - --disable
+    - traefik
   ntp_servers:
     - 0.fr.pool.ntp.org
     - 1.fr.pool.ntp.org
