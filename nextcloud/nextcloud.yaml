@@ -30,7 +30,7 @@ spec:
         app: nextcloud
     spec:
       containers:
-        - image: nextcloud:24.0.6-fpm
+        - image: nextcloud:24.0.7-fpm
           name: nextcloud
           env:
             - name: POSTGRES_HOST
@@ -53,6 +53,8 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: password
+            - name: NEXTCLOUD_UPDATE
+              value: "1"
           ports:
             - containerPort: 9000
               name: fpm

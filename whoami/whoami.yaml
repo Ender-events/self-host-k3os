@@ -30,7 +30,7 @@ spec:
         app: whoami
     spec:
       containers:
-        - image: traefik/whoami:v1.8.1
+        - image: traefik/whoami:v1.8.7
           name: whoami
           ports:
             - containerPort: 80
