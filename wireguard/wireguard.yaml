@@ -51,7 +51,7 @@ spec:
       name: wireguard
     spec:
       containers:
-        - image: ghcr.io/linuxserver/wireguard:alpine-v1.0.20210914-ls4
+        - image: ghcr.io/linuxserver/wireguard:alpine-v1.0.20210914-ls7
           name: wireguard
           securityContext:
             capabilities:
@@ -60,8 +60,6 @@ spec:
                 - NET_ADMIN
           env:
             - name: PUID
-              value: "1000"
-            - name: PGID
               value: "1000"
             - name: PGID
               value: "1000"

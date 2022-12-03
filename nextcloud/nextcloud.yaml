@@ -63,7 +63,7 @@ spec:
               mountPath: /var/www/html
           command: ["/entrypoint.sh"]
           args: ["bash", "-c", "/cron.sh & php-fpm"]
-        - image: nginx:1.22.0-alpine
+        - image: nginx:1.23.2-alpine
           name: nginx
           ports:
             - containerPort: 80
