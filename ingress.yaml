@@ -5,9 +5,10 @@ metadata:
   name: ingress
   namespace: default
   annotations:
-    cert-manager.io/issuer: selfsigned-issuer
+    cert-manager.io/cluster-issuer: selfsigned-issuer
     ingress.kubernetes.io/force-ssl-redirect: "true"
-    projectcontour.io/response-timeout: 3600
+    projectcontour.io/response-timeout: "3600s"
+    projectcontour.io/websocket-routes: "/cool/"
 spec:
   tls:
     - hosts:
@@ -35,6 +36,26 @@ spec:
                 port:
                   number: 80
             path: /
+            pathType: Prefix
+    - host: collabora.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: collabora
+                port:
+                  number: 9980
+            path: /
+            pathType: Prefix
+    - host: collabora.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: collabora
+                port:
+                  number: 9980
+            path: "/cool/"
             pathType: Prefix
     - host: minio.localhost
       http:

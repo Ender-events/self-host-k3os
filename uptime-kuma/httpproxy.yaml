@@ -30,5 +30,5 @@ spec:
   - kuma.localhost
   issuerRef:
     name: letsencrypt-prod
-    kind: Issuer
+    kind: ClusterIssuer
   secretName: kuma-tls-certificate

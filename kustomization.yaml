@@ -14,6 +14,10 @@ secretGenerator:
       - access_key_id=.secrets/restic-staging-secret/access_key_id
       - secret_access_key=.secrets/restic-staging-secret/secret_access_key
       - password=.secrets/restic-staging-secret/password
+  - name: collabora-secret
+    files:
+      - username=.secrets/collabora-secret/username
+      - password=.secrets/collabora-secret/password
   - name: minio-secret
     files:
       - access_key_id=.secrets/minio-secret/access_key_id
@@ -46,6 +50,10 @@ configMapGenerator:
     behavior: merge  # nextcloud/config.yaml
     files:
       - nginx_conf=nextcloud/nginx.conf
+  - name: collabora-config
+    files:
+      - aliasgroup1=.secrets/collabora-config/aliasgroup
+      - server_name=.secrets/collabora-config/server_name
   - name: wireguard-config
     files:
       - host=.secrets/wireguard-config/host
@@ -60,6 +68,7 @@ resources:
   - nextcloud/config.yaml
   # - nextcloud/restore.yaml # don't need to restore now
   - nextcloud/nextcloud.yaml
+  - nextcloud/collabora.yaml
   - nextcloud/backup.yaml
   - minio/minio.yaml
   - n8n/n8n.yaml

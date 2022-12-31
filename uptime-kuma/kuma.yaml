@@ -43,7 +43,7 @@ spec:
         app: uptime-kuma
     spec:
       containers:
-        - image: louislam/uptime-kuma:1.19.2
+        - image: louislam/uptime-kuma:1.19.3
           name: uptime-kuma
           ports:
             - containerPort: 3001

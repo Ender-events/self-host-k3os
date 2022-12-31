@@ -1,0 +1,65 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: collabora
+  labels:
+    app: collabora
+spec:
+  ports:
+    - port: 9980
+  selector:
+    app: collabora
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collabora
+  labels:
+    app: collabora
+spec:
+  selector:
+    matchLabels:
+      app: collabora
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: collabora
+    spec:
+      containers:
+        - image: collabora/code:22.05.9.2.1
+          name: collabora
+          env:
+            - name: aliasgroup1
+              valueFrom:
+                configMapKeyRef:
+                  name: collabora-config
+                  key: aliasgroup1
+            - name: server_name
+              valueFrom:
+                configMapKeyRef:
+                  name: collabora-config
+                  key: server_name
+            - name: username
+              valueFrom:
+                secretKeyRef:
+                  name: collabora-secret
+                  key: username
+            - name: password
+              valueFrom:
+                secretKeyRef:
+                  name: collabora-secret
+                  key: password
+            - name: extra_params
+              value: "--o:ssl.enable=false --o:ssl.termination=true"
+          ports:
+            - containerPort: 9980
+          volumeMounts:
+            - name: collabora-ephemeral-storage
+              mountPath: /tmp
+      volumes:
+        - name: collabora-ephemeral-storage
+          emptyDir: {}
