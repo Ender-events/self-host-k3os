@@ -7,6 +7,7 @@ metadata:
   annotations:
     cert-manager.io/issuer: selfsigned-issuer
     ingress.kubernetes.io/force-ssl-redirect: "true"
+    projectcontour.io/response-timeout: 3600
 spec:
   tls:
     - hosts:
