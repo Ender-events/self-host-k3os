@@ -17,7 +17,7 @@ spec:
         app: parrot-discord
     spec:
       containers:
-        - image: ghcr.io/aquelemiguel/parrot:v1.5.1
+        - image: ghcr.io/aquelemiguel/parrot:v1.6.0
           name: parrot-discord
           env:
             - name: DISCORD_TOKEN
@@ -30,3 +30,5 @@ spec:
                 secretKeyRef:
                   name: parrot-discord-secret
                   key: discord-appid
+            - name: RUST_BACKTRACE
+              value: "1"
