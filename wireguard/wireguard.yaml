@@ -51,7 +51,7 @@ spec:
       name: wireguard
     spec:
       containers:
-        - image: ghcr.io/linuxserver/wireguard:v1.0.20210914-ls122
+        - image: ghcr.io/linuxserver/wireguard:v1.0.20210914-ls126
           name: wireguard
           securityContext:
             capabilities:

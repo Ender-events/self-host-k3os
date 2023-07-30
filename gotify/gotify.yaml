@@ -43,7 +43,7 @@ spec:
         app: gotify
     spec:
       containers:
-        - image: gotify/server:2.2.5
+        - image: gotify/server:2.3.0
           name: gotify
           env:
             - name: GOTIFY_DEFAULTUSER_NAME
