@@ -13,7 +13,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: backup
-              image: ghcr.io/ender-events/self-host-backup:v1.1.3
+              image: ghcr.io/ender-events/self-host-backup:main
               env:
                 - name: PGHOST
                   valueFrom:
