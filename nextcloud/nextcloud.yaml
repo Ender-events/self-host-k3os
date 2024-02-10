@@ -30,7 +30,7 @@ spec:
         app: nextcloud
     spec:
       containers:
-        - image: nextcloud:28.0.1-fpm
+        - image: nextcloud:28.0.2-fpm
           name: nextcloud
           env:
             - name: POSTGRES_HOST
