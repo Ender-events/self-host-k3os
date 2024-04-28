@@ -17,7 +17,7 @@ spec:
         app: parrot-discord
     spec:
       containers:
-        - image: ghcr.io/aquelemiguel/parrot:v1.6.0
+        - image: ghcr.io/aquelemiguel/parrot:main
           name: parrot-discord
           env:
             - name: DISCORD_TOKEN

@@ -30,7 +30,7 @@ spec:
         app: collabora
     spec:
       containers:
-        - image: collabora/code:23.05.7.2.1
+        - image: collabora/code:24.04.1.4.1
           name: collabora
           env:
             - name: aliasgroup1
