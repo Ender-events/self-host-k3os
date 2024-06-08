@@ -43,7 +43,7 @@ spec:
         app: postgres
     spec:
       containers:
-        - image: postgres:12.18-alpine
+        - image: postgres:12.19-alpine
           name: postgres
           env:
             - name: POSTGRES_USER
