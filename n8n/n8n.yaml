@@ -43,7 +43,7 @@ spec:
         app: n8n
     spec:
       containers:
-        - image: n8nio/n8n:1.51.2
+        - image: n8nio/n8n:1.55.3
           name: n8n
           env:
             - name: N8N_PROTOCOL
